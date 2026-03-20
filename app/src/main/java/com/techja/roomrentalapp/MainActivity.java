@@ -47,7 +47,10 @@ public class MainActivity extends AppCompatActivity {
                 openForm(position, true);
             }
 
-
+            @Override
+            public void onDelete(int position) {
+                showDeleteConfirm(position);
+            }
         });
 
         rvRooms.setLayoutManager(new LinearLayoutManager(this));
@@ -65,6 +68,19 @@ public class MainActivity extends AppCompatActivity {
         }
         intent.putExtra(RoomFormActivity.EXTRA_VIEW_ONLY, viewOnly);
         formLauncher.launch(intent);
+    }
+    private void showDeleteConfirm(int position) {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.delete_room)
+                .setMessage(R.string.delete_confirm_message)
+                .setNegativeButton(R.string.cancel, null)
+                .setPositiveButton(R.string.delete, (dialog, which) -> {
+                    if (roomController.deleteRoom(position)) {
+                        roomAdapter.notifyDataSetChanged();
+                        updateEmptyState();
+                    }
+                })
+                .show();
     }
 
     private void updateEmptyState() {
