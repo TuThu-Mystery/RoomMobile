@@ -17,5 +17,4 @@
 local.properties
 
 # Ignore specific layout XML files
-/app/src/main/res/layout/activity_room_form.xml
-/app/src/main/res/layout/item_room.xml
+
