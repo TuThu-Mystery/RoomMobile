@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
                 if (result.getResultCode() == RESULT_OK) {
                     roomAdapter.notifyDataSetChanged();
-//                    updateEmptyState();
                 }
             });
 
@@ -47,15 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 openForm(position, true);
             }
 
-//            @Override
-//            public void onEdit(int position) {
-//                openForm(position, false);
-//            }
-//
-//            @Override
-//            public void onDelete(int position) {
-//                showDeleteConfirm(position);
-//            }
+
         });
 
         rvRooms.setLayoutManager(new LinearLayoutManager(this));
@@ -63,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
 
         fabAdd.setOnClickListener(v -> openForm(-1, false));
 
-//        updateEmptyState();
     }
 
     private void openForm(int position, boolean viewOnly) {
@@ -75,25 +65,4 @@ public class MainActivity extends AppCompatActivity {
         formLauncher.launch(intent);
     }
 
-//    private void showDeleteConfirm(int position) {
-//        new AlertDialog.Builder(this)
-//                .setTitle(R.string.delete_room)
-//                .setMessage(R.string.delete_confirm_message)
-//                .setNegativeButton(R.string.cancel, null)
-//                .setPositiveButton(R.string.delete, (dialog, which) -> {
-//                    if (roomController.deleteRoom(position)) {
-//                        roomAdapter.notifyDataSetChanged();
-//                        updateEmptyState();
-//                    }
-//                })
-//                .show();
-//    }
-
-//    private void updateEmptyState() {
-//        if (roomController.getRoomList().isEmpty()) {
-//            tvEmptyState.setVisibility(View.VISIBLE);
-//        } else {
-//            tvEmptyState.setVisibility(View.GONE);
-//        }
-//    }
 }
