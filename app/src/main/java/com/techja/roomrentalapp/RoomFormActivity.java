@@ -58,4 +58,47 @@ public class RoomFormActivity extends AppCompatActivity {
         btnSave = findViewById(R.id.btnSaveRoom);
     }
 
+    private void saveRoom() {
+        String roomCode = etRoomCode.getText().toString().trim();
+        String roomName = etRoomName.getText().toString().trim();
+        String rentalPriceText = etRentalPrice.getText().toString().trim();
+        boolean occupied = rbOccupied.isChecked();
+        String tenantName = etTenantName.getText().toString().trim();
+        String phoneNumber = etPhoneNumber.getText().toString().trim();
+
+        if (!occupied) {
+            tenantName = "";
+            phoneNumber = "";
+        }
+
+        String validationError = roomController.validateRoomData(
+                roomCode,
+                roomName,
+                rentalPriceText,
+                occupied,
+                tenantName,
+                phoneNumber,
+                editingIndex
+        );
+
+        if (validationError != null) {
+            Toast.makeText(this, validationError, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        double rentalPrice = Double.parseDouble(rentalPriceText);
+        RentalRoom room = new RentalRoom(roomCode, roomName, rentalPrice, occupied, tenantName, phoneNumber);
+
+        if (editingIndex >= 0) {
+            // Update existing room
+        } else {
+            roomController.addRoom(room);
+        }
+
+        setResult(RESULT_OK);
+        finish();
+    }
+
+
+
 }

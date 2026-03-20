@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
                 if (result.getResultCode() == RESULT_OK) {
                     roomAdapter.notifyDataSetChanged();
+                    updateEmptyState();
                 }
             });
 
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         fabAdd.setOnClickListener(v -> openForm(-1, false));
 
+        updateEmptyState();
     }
 
     private void openForm(int position, boolean viewOnly) {
@@ -63,6 +65,14 @@ public class MainActivity extends AppCompatActivity {
         }
         intent.putExtra(RoomFormActivity.EXTRA_VIEW_ONLY, viewOnly);
         formLauncher.launch(intent);
+    }
+
+    private void updateEmptyState() {
+        if (roomController.getRoomList().isEmpty()) {
+            tvEmptyState.setVisibility(View.VISIBLE);
+        } else {
+            tvEmptyState.setVisibility(View.GONE);
+        }
     }
 
 }
