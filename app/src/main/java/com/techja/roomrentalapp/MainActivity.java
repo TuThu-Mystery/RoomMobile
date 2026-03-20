@@ -7,12 +7,10 @@ import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.techja.roomrentalapp.adapter.RoomAdapter;
 import com.techja.roomrentalapp.controller.RoomController;
 
@@ -26,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
                 if (result.getResultCode() == RESULT_OK) {
                     roomAdapter.notifyDataSetChanged();
+                    updateEmptyState();
                 }
             });
 
@@ -37,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         roomController = RoomController.getInstance();
 
         RecyclerView rvRooms = findViewById(R.id.rvRooms);
-        FloatingActionButton fabAdd = findViewById(R.id.fabAddRoom);
         tvEmptyState = findViewById(R.id.tvEmptyState);
 
         roomAdapter = new RoomAdapter(roomController.getRoomList(), new RoomAdapter.OnRoomActionListener() {
@@ -46,14 +44,16 @@ public class MainActivity extends AppCompatActivity {
                 openForm(position, true);
             }
 
-
+            @Override
+            public void onEdit(int position) {
+                openForm(position, false);
+            }
         });
 
         rvRooms.setLayoutManager(new LinearLayoutManager(this));
         rvRooms.setAdapter(roomAdapter);
 
-        fabAdd.setOnClickListener(v -> openForm(-1, false));
-
+        updateEmptyState();
     }
 
     private void openForm(int position, boolean viewOnly) {
@@ -65,4 +65,11 @@ public class MainActivity extends AppCompatActivity {
         formLauncher.launch(intent);
     }
 
+    private void updateEmptyState() {
+        if (roomController.getRoomList().isEmpty()) {
+            tvEmptyState.setVisibility(View.VISIBLE);
+        } else {
+            tvEmptyState.setVisibility(View.GONE);
+        }
+    }
 }

@@ -21,7 +21,7 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
 
     public interface OnRoomActionListener {
         void onView(int position);
-
+        void onEdit(int position);
     }
 
     private static final Locale LOCALE_VI = new Locale("vi", "VN");
@@ -69,6 +69,16 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
             holder.tvPhoneNumber.setVisibility(View.GONE);
         }
 
+        holder.btnEdit.setOnClickListener(v -> {
+            int adapterPosition = holder.getBindingAdapterPosition();
+            if (adapterPosition != RecyclerView.NO_POSITION) {
+                actionListener.onEdit(adapterPosition);
+            }
+        });
+
+        if (holder.btnDelete != null) {
+            holder.btnDelete.setVisibility(View.GONE);
+        }
 
         holder.itemView.setOnClickListener(v -> {
             int adapterPosition = holder.getBindingAdapterPosition();

@@ -71,4 +71,3 @@ public class RentalRoom {
         this.phoneNumber = phoneNumber;
     }
 }
-
