@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">RoomRentalApp</string>
+    <string name="room_list_title">Danh sách phòng trọ</string>
+    <string name="no_rooms">Chưa có phòng trọ nào, nhấn để thêm mới</string>
+    <string name="add_room">Thêm phòng</string>
+    <string name="edit_room">Sửa phòng</string>
+    <string name="view_room">Xem phòng</string>
+    <string name="delete_room">Xóa phòng</string>
+    <string name="delete_confirm_message">Bạn có chắc muốn xóa phòng này?</string>
+    <string name="cancel">Hủy</string>
+    <string name="delete">Xóa</string>
+    <string name="edit">Sửa</string>
+    <string name="save">Lưu</string>
+    <string name="room_code">Mã phòng</string>
+    <string name="room_name">Tên phòng</string>
+    <string name="rental_price">Giá thuê</string>
+    <string name="room_status">Tình trạng</string>
+    <string name="status_available">Còn trống</string>
+    <string name="status_occupied">Đã thuê</string>
+    <string name="tenant_name">Tên người thuê</string>
+    <string name="phone_number">Số điện thoại</string>
+    <string name="tenant_template">Người thuê: %1$s</string>
+    <string name="phone_template">SDT: %1$s</string>
+    <string name="room_not_found">Không tìm thấy phòng để sửa</string>
+</resources>
