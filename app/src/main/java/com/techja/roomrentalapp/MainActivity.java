@@ -51,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
             public void onDelete(int position) {
                 showDeleteConfirm(position);
             }
+            @Override
+            public void onEdit(int position) {
+                openForm(position, false);
+            }
         });
 
         rvRooms.setLayoutManager(new LinearLayoutManager(this));
@@ -90,5 +94,6 @@ public class MainActivity extends AppCompatActivity {
             tvEmptyState.setVisibility(View.GONE);
         }
     }
+
 
 }

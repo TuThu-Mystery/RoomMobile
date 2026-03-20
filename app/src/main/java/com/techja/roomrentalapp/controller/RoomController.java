@@ -38,16 +38,20 @@ public class RoomController {
         roomList.add(room);
     }
 
-        public boolean deleteRoom(int index) {
+    public boolean updateRoom(int index, RentalRoom updatedRoom) {
+        if (index < 0 || index >= roomList.size()) {
+            return false;
+        }
+        roomList.set(index, updatedRoom);
+        return true;
+    }
+
+    public boolean deleteRoom(int index) {
         if (index < 0 || index >= roomList.size()) {
             return false;
         }
         roomList.remove(index);
         return true;
-    }
-    private void seedData() {
-        roomList.add(new RentalRoom("P101", "Phòng 101", 2500000, false, "", ""));
-        roomList.add(new RentalRoom("P102", "Phòng 102", 3200000, true, "Nguyen Van A", "0987654321"));
     }
 
     public String validateRoomData(String roomCode,
@@ -103,5 +107,9 @@ public class RoomController {
         return null;
     }
 
+    private void seedData() {
+        roomList.add(new RentalRoom("P101", "Phòng 101", 2500000, false, "", ""));
+        roomList.add(new RentalRoom("P102", "Phòng 102", 3200000, true, "Nguyen Van A", "0987654321"));
+    }
 }
 
